@@ -1,37 +1,21 @@
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
-        
-        def marge(arr, L, M, R):
-            left, right = arr[L:M+1], arr[M+1:R+1]
-            i , j , k = L, 0, 0
 
-            while j < len(left) and k < len(right):
-                if left[j] <= right[k]:
-                    arr[i] = left[j]
-                    j += 1
-                else:
-                    arr[i] = right[k]
-                    k += 1
-                i +=1
-            while j < len(left):
-                arr[i] = left[j]
-                j += 1
-                i += 1
-            while j < len(right):
-                arr[i] = right[k]
-                k += 1
-                i += 1
-                
-                
-        
-        def margeSort(arr, l, r):
-            if l == r:
-                return arr
+        def counting_sort(arr):
+            count = defaultdict(int)
+            min_value, max_value = min(arr), max(arr)
 
-            m = (r+l) // 2
-            margeSort(arr, l, m)
-            margeSort(arr, m+1, r)
-            marge(arr, l, m, r)
+            for value in arr:
+                count[value] += 1
+    
+            index = 0
+    
+            for value in range(min_value, max_value + 1):
+                while count[value] > 0:
+                    arr[index] = value
+                    index += 1
+                    count[value] -= 1
+    
             return arr
-        
-        return margeSort(nums, 0, len(nums) - 1)
+
+        return(counting_sort(nums))
