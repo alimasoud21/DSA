@@ -7,5 +7,6 @@ class Solution:
             row = []
             for j in range(len(res[-1]) + 1):
                 row.append(temp[j] + temp[j + 1])
+            res.pop()
             res.append(row)
         return(res[-1])
